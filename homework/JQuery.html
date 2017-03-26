@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://enos.itcollege.ee/~ttanav/VRI/Kodused/06/loop.html -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>JQuery</title>
+	<style type="text/css">
+	.active {background: skyblue; padding: 10px;}
+	</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js">
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	$("li:first").addClass("active");
+		
+		$("#next").click(function(){
+			var valitud=$("li.active");
+			if (valitud.is($("li").last())){
+				$("li.active").removeClass("active");
+				$("li").first().addClass("active");
+			}else {
+				valitud.next("li").addClass("active");
+				valitud.first().removeClass("active");
+			}
+		});
+		$("#prev").click(function(){
+			var valitud=$("li.active");
+			if (valitud.is($("li").first())){
+				$("li.active").removeClass("active");
+				$("li").last().addClass("active");
+			}else {
+				valitud.prev("li").addClass("active");
+				valitud.last().removeClass("active");
+			}
+		});	
+	});
+	</script>
+</head>
+<body>
+<button id="next">edasi</button>
+<button id="prev">tagasi</button>
+
+<ul>
+<li>esimene</li>
+<li>teine</li>
+<li>kolmas</li>
+<li>neljas</li>
+</ul>
+
+
+</body></html>
