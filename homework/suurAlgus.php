@@ -36,8 +36,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 */
 $paragraph = explode("\n", $text);
 foreach ($paragraph as $rida){
-	$rida = substr($rida, '</span>', 1, 0);
-	echo $rida;
+	$basic = substr($rida, 1);
+	echo "<span>$rida[0]</span>$basic"; 
 }
 ?>
 </div>
