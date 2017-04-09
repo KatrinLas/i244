@@ -37,12 +37,9 @@
  	  $textsize=htmlspecialchars($_POST['textsize']);
 	} 
 
-
-
 ?>
+
 <style type="text/css">
-
-
 
 #kujundus {
 	margin:10px;
@@ -67,9 +64,6 @@
 	border-color: <?php echo $bordercolor; ?>;
 	border-radius: <?php echo $borderradius; ?>px;
 }
-	
-
-
 </style>
 
 
@@ -82,27 +76,24 @@
 <div id="kujundus">
 	<form action="8homework.php" method="post">
 	
-	<textarea name="text" rows=5 cols=30 placeholder="Siia kirjuta tekst"></textarea>
-	<br><input type="color" name="background">Taustavärv<br>
-	<input type="color" name="textcolor">Tekstivärvus</br>
-	<input type="number" name="textsize" min="9" max="32"> Teksti suurus (9-32)</br>
-	<input type="font" name="textstyle"> Teksti stiil
-	<br>
+	<textarea name="text" rows=5 cols=30 placeholder="Siia kirjuta tekst"></textarea><br>
+	<input type="color" name="background">Taustavärv<br>
+	<input type="color" name="textcolor">Tekstivärvus<br>
+	<input type="number" name="textsize" min="9" max="32"> Teksti suurus (9-32)<br>
 <p>
-	<input type="number" name="borderwidth" min="0" max="20"> Piirjoone laius (vahemik 0-20px)<br>
-	<select name="borderstyle"><br>
-		<option>solid</option>
-		<option>double</option>
-		<option>dotted</option>
-	</select>
-	<input type="color" name="bordercolor">Piirjoone värvus<br>
-	<input type="number" name="borderradius" min="0" max="100"> Piirjoone nurga raadius (vahemik 0-100px)<br>
-<p>
+	
+		<input type="number" name="borderwidth" min="0" max="20"> Piirjoone laius (vahemik 0-20px)<br>
+		<select name="borderstyle">
+			<option>solid</option>
+			<option>double</option>
+			<option>dotted</option>
+		</select>
+		<input type="color" name="bordercolor">Piirjoone värvus<br>
+		<input type="number" name="borderradius" min="0" max="100"> Piirjoone nurga raadius (vahemik 0-100px)<br>
+</p>
 	<input type="submit" value="esita">
-
+	</form>
 </div>
-
-
 
 
 </body>
