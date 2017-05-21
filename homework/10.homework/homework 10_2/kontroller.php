@@ -1,3 +1,4 @@
+<meta charset="utf-8" />
 <?php
 $expire=100; // sessiooni aegumise aeg sekundites serveris
 ini_set('session.gc-maxlifetime', $expire);
@@ -25,6 +26,7 @@ switch($page){
 			header('Location: ?page=tulemus');
 		}
 		include("vaated/vote.html"); //lingin vote.html-i
+		
 	break;
 	case "tulemus":
 		$id=false;
