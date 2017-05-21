@@ -18,25 +18,22 @@ function logi(){
 	}
 	else {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if ($_POST["user"] == '' || $_POST["pass"] == '') {
-                $errors = array();
+			$errors = array();
 			
-				if (!empty($_POST["user"])) {
-				}else $errors[] = "Sisestage kasutajanimi";
+			if (!empty($_POST["user"])) {
+			}else $errors[] = "Sisestage kasutajanimi";
         
-				if (!empty($_POST["pass"])) {
-				} else $errors[] = "Sisestage parool";
+			if (!empty($_POST["pass"])) {
+			} else $errors[] = "Sisestage parool";
 				
-			}else {
+			if (empty($errors)) {
 				$kasutaja = mysqli_real_escape_string($connection, $_POST["user"]);
 				$parool = mysqli_real_escape_string($connection, $_POST["pass"]);
 				$sql = "SELECT id FROM klasberg_kylastajad WHERE username = '$kasutaja' and passw= SHA1('$parool')";
 				$result = mysqli_query($connection, $sql) or die ("ei saa parooli ja kasutajat kontrollitud".mysqli_error($connection));
 				//$rida = mysqli_num_rows($result);
 				
-				
-				if (mysqli_fetch_assoc($result)) {
-					
+				if (mysqli_num_rows($result)) {
 					$_SESSION['user'] = $_POST['user'];
 					$_SESSION['roll'] = mysqli_fetch_assoc($result)['roll'];
 					header("Location: ?page=loomad");
@@ -118,13 +115,16 @@ function lisa(){
 	include_once('views/loomavorm.html');
 	
 	}
-}	
+	
 	
 function upload($name){
+	$allowedExts = array("jpg", "jpeg", "gif", "png");
+	$allowedTypes = array("image/gif", "image/jpeg", "image/png","image/pjpeg");
+	$extension = end(explode(".", $_FILES[$name]["name"]));
  	if ( in_array($_FILES[$name]["type"], $allowedTypes)
  		&& ($_FILES[$name]["size"] < 100000)
  		&& in_array($extension, $allowedExts)) {
-    // fail õiget tüüpi ja suurusega
+   
 	// fail õiget tüüpi ja suurusega
  		if ($_FILES[$name]["error"] > 0) {
 			$_SESSION['notices'][]= "Return Code: " . $_FILES[$name]["error"];
@@ -159,18 +159,58 @@ function upload($name){
  	}
 }	
 
-function hangi_loom($id)
-{
+function hangi_loom($id){
+
     global $connection;
-    $vaartus = mysqli_real_escape_string($connection, $id);
-    $sql = "SELECT nimi, vanus, liik, PUUR FROM klasberg WHERE id='$id'";
-    $result = mysqli_query($connection, $sql) or die("Sellist looma ei ole!");
-    $looma_info = array();
-    while ($rida = mysqli_fetch_assoc($result)) {
-        $looma_info = $rida;
+    $sql = "SELECT * FROM klasberg WHERE id='$id'";
+    $result = mysqli_query($connection, $sql) or die ("ei saanud loomade andmeid");
+    if (mysqli_num_rows($result)) {
+        return mysqli_fetch_assoc($result);
+    } else {
+        header("Location: ?page=loomad");
     }
-    return $looma_info;
 }
+function muuda(){
+    global $connection;
+    global $errors;
+    if (empty($_SESSION["user"])) {
+        header("Location: ?page=login");
+    } elseif ($_SESSION["roll"] == "user") {
+        header("Location: ?page=loomad");
+    } else {
+        if (!empty($_POST['id'])){
+            $id = mysqli_real_escape_string($connection, $_POST['id']);
+            $loom = hangi_loom($id);
+            }
+        elseif (!empty($_GET['id']) or (!empty($_GET["id"]))){
+            $id = mysqli_real_escape_string($connection, $_GET['id']);
+            $loom = hangi_loom($id);
+        }
+        else header("Location: ?page=loomad");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $errors = array();
+            if (!empty($_POST['nimi'])) {
+            } else $errors[] = "Sisestage loomanimi";
+            if (!empty($_POST['puur'])) {
+            } else $errors[] = "Sisestage puur";
+            if (empty($errors)) {
+                $id = mysqli_real_escape_string($connection, $_POST['id']);
+                $loomanimi = mysqli_real_escape_string($connection, $_POST["nimi"]);
+                $puurinr = mysqli_real_escape_string($connection, $_POST["puur"]);
+                if (upload("liik")) {
+                    $fail = mysqli_real_escape_string($connection, upload("liik"));
+                } else {
+                    $fail = $loom['liik'];
+                }
+                $sql = "UPDATE klasberg SET nimi = '$loomanimi', puur = '$puurinr', liik = '$fail' WHERE id = '$id'";
+                $result = mysqli_query($connection, $sql) or die ("ei saa looma muudetud".mysqli_error($connection));
+                print_r($result);
+                header("Location: ?page=loomad");
+            }
+        }
+    }
+    include_once('views/editvorm.html');
+}	
 
 
 ?>
