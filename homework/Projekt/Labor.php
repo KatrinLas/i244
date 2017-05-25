@@ -3,7 +3,7 @@ require_once('Content.php');
 session_start();
 connect_db();
 
-$page="pealeht";
+$page="avaleht";
 if (isset($_GET['page']) && $_GET['page']!=""){
 	$page=htmlspecialchars($_GET['page']);
 }
@@ -14,8 +14,8 @@ switch($page){
 	case "login":
 		logi();
 	break;
-	case "Otsing":
-	//kuva otsing();
+	case "teenused":
+		kuva_teenused();
 	break;
 	case "logout":
 		logout();

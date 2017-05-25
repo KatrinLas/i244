@@ -15,7 +15,7 @@ function logi(){
 	global $connection;
 	global $errors;
 	if (!empty($_SESSION['user'])){
-		header("Location: ?page=Teenused");
+		header("Location: ?page=teenused");
 	}
 	else {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -37,15 +37,14 @@ function logi(){
 				if (mysqli_num_rows($result)) {
 					$_SESSION['user'] = $_POST['user'];
 					$_SESSION['roll'] = mysqli_fetch_assoc($result)['roll'];
-					header("Location: ?page=Teenused");
+					header("Location: ?page=teenused");
 				} else {
 					header("Location: ?page=login");
 				}	
             }
         
 		}  
-    }
-		include_once('views/login.html');
+    }include_once('views/login.html');
 
 }
 
@@ -54,26 +53,9 @@ function logout(){
 	session_destroy();
 	header("Location: ?");
 }
-
-function kuva_puurid(){
-	// siia on vaja funktsionaalsust
-	global $connection;
-	if (empty($_SESSION['user'])) {
-        header("Location: ?page=login");
-    }
-    $puurid = array();
-    $sql = "SELECT DISTINCT(puur) AS puur FROM klasberg ORDER BY puur ASC";
-    $puuride_nr = mysqli_query($connection, $sql) or die ("ei leidnud puuride numbreid");
-    while ($puuri_nr = mysqli_fetch_assoc($puuride_nr)){
-        $sql = "SELECT * FROM klasberg WHERE puur =".mysqli_real_escape_string($connection, $puuri_nr['puur']);
-        $loomad = mysqli_query($connection, $sql) or die ("ei leidnud vastavaid loomi");
-        while ($loomarida = mysqli_fetch_assoc($loomad)){
-            $puurid[$puuri_nr['puur']][]=$loomarida;
-        }
-    }
-	include_once('views/puurid.html');
-	
-}
+function kuva_teenused(){
+	include_once('views/teenused.html');
+}	
 
 function lisa(){
 	global $connection;
@@ -84,22 +66,22 @@ function lisa(){
 	}
 	//kui on tavakasutaja suunab
 	elseif ($_SESSION['roll'] == 'user') {
-		header("Location: ?page=Lisa ");
+		header("Location: ?page=teenused");
 	}
 	//kui ei ole tavakasutaja ehk on adminn suunab
 	else {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
-			if (!empty($_POST['t2his'])) {
+			if (!empty($_POST['Proovi tähis'])) {
 			} else $errors[] = "Sisestage proovi tähis";
 			
-			if (!empty($_POST['materjal'])) {
+			if (!empty($_POST['Proovi materjal'])) {
 			} else $errors[] = "Sisestage proovi materjal";
 			
-			if (!empty($_POST['koht'])) {
+			if (!empty($_POST['Proovivõtu koht'])) {
 			} else $errors[] = "Sisestage proovivõtu koht";
 			
-			if (!empty($_POST['aeg'])) {
+			if (!empty($_POST['Proovivõtu aeg'])) {
 			} else $errors[] = "Sisestage proovivõtu aeg";
 			
 			if (empty($errors)) {
@@ -113,17 +95,18 @@ function lisa(){
 				$id = mysqli_insert_id($result);
 				if ($id) {
 					$_SESSION['user'] = $_POST['user'];
-					header("Location: ?page=Teenused");
+					header("Location: ?page=teenused");
 				} else {
-					header("Location: ?page=proovisisestus");
+					header("Location: ?page=lisa");
 				}	
 			}
 			
 		}
 	}	
-	include_once('views/proovisisestus.html');
+		include_once('views/lisaproov.html');
 	
-	}
+}	
+
 	
 	
 function upload($name){
