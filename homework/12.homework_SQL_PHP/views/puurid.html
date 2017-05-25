@@ -3,6 +3,7 @@
         <div>
             <p>Puuris nr <?php echo $pr;?> elavad:</p>
             <?php foreach ($puur as $loom):?>
+			
 			<?php if($_SESSION['roll'] == 'admin'): ?>
 			<a href="?page=muuda&id=<?php echo $loom['id']?> ">
 			<?php endif; ?>
@@ -15,3 +16,6 @@
     <?php endforeach; ?>
 <?php endif;?>
 
+<pre>
+    <?php print_r($puurid);?>
+</pre>

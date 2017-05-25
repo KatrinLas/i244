@@ -13,6 +13,7 @@ function connect_db(){
 function logi(){
 	// siia on vaja funktsionaalsust (13. nädalal)
 	global $connection;
+	global $errors;
 	if (!empty($_SESSION['user'])){
 		header("Location: ?page=loomad");
 	}
@@ -20,16 +21,16 @@ function logi(){
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
 			
-			if (!empty($_POST["user"])) {
+			if (!empty($_POST['user'])) {
 			}else $errors[] = "Sisestage kasutajanimi";
         
-			if (!empty($_POST["pass"])) {
+			if (!empty($_POST['pass'])) {
 			} else $errors[] = "Sisestage parool";
 				
 			if (empty($errors)) {
 				$kasutaja = mysqli_real_escape_string($connection, $_POST["user"]);
 				$parool = mysqli_real_escape_string($connection, $_POST["pass"]);
-				$sql = "SELECT id FROM klasberg_kylastajad WHERE username = '$kasutaja' and passw= SHA1('$parool')";
+				$sql = "SELECT id, roll FROM klasberg_kylastajad WHERE username = '{$kasutaja}' and passw= SHA1('{$parool}')";
 				$result = mysqli_query($connection, $sql) or die ("ei saa parooli ja kasutajat kontrollitud".mysqli_error($connection));
 				//$rida = mysqli_num_rows($result);
 				
@@ -44,8 +45,8 @@ function logi(){
         
 		}  
     }
+		include_once('views/login.html');
 
-	include_once('views/login.html');
 }
 
 function logout(){
@@ -57,7 +58,7 @@ function logout(){
 function kuva_puurid(){
 	// siia on vaja funktsionaalsust
 	global $connection;
-	if (empty($_SESSION["user"])) {
+	if (empty($_SESSION['user'])) {
         header("Location: ?page=login");
     }
     $puurid = array();
@@ -83,7 +84,8 @@ function lisa(){
 	}
 	elseif ($_SESSION['roll'] == 'user') {
 		header("Location: ?page=loomad");
-	}else {
+	}
+	else {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
 			if (!empty($_POST['nimi'])) {

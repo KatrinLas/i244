@@ -15,7 +15,7 @@ switch($page){
 		logi();
 	break;
 	case "loomad":
-		kuva_puurid();
+	kuva_puurid();
 	break;
 	case "logout":
 		logout();
@@ -23,8 +23,8 @@ switch($page){
 	case "lisa":
 		lisa();
 	break;
-	case "muuda":
-		muuda();
+case "muuda":
+	muuda();
 	break;
 	default:
 		include_once('views/v2rav.html');
