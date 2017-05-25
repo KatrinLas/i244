@@ -1,0 +1,12 @@
+<form action="?page=lisa" method="POST" enctype="multipart/form-data">
+	<input type="text" name="proovi tähis" placeholder="proovi tähis" value="<?php if (isset($proov['proovi tähis'])) echo htmlspecialchars($proov['proovi tähis']); ?>"/><br/>
+	<input type="text" name="proovi materjal" placeholder="proovi materjal" value="<?php if (isset($proov['proovi materjal'])) echo htmlspecialchars($proov['proovi materjal']); ?>"/><br/>
+	<input type="text" name="proovivõtu koht" placeholder="proovivõtu koht" value="<?php if (isset($proov['proovivõtu koht'])) echo htmlspecialchars($proov['proovivõtu koht']); ?>"/><br/>
+	<input type="number" name="proovivõtu aeg" placeholder="proovivõtu aeg" value="<?php if (isset($proov['proovivõtu aeg'])) echo htmlspecialchars($proov['proovivõtu aeg']); ?>"/><br/>
+	<input type="submit" value="Lisa"/> 
+</form>
+<?php if (isset($errors)):?>
+		<?php foreach($errors as $error):?>
+			<div style="color:red;"><?php echo htmlspecialchars($error); ?></div>
+		<?php endforeach;?>
+	<?php endif;?>

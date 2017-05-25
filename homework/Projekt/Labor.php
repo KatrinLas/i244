@@ -1,5 +1,5 @@
 <?php
-require_once('Main.php');
+require_once('Content.php');
 session_start();
 connect_db();
 
@@ -14,8 +14,8 @@ switch($page){
 	case "login":
 		logi();
 	break;
-	case "Teenused":
-	//kuva_puurid();
+	case "Otsing":
+	//kuva otsing();
 	break;
 	case "logout":
 		logout();
