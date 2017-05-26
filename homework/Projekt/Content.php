@@ -55,6 +55,9 @@ function logout(){
 }
 function kuva_teenused(){
 	include_once('views/teenused.html');
+}
+
+function otsi(){
 }	
 
 function lisa(){
@@ -72,24 +75,24 @@ function lisa(){
 	else {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
-			if (!empty($_POST['Proovi tähis'])) {
+			if (!empty($_POST['tähis'])) {
 			} else $errors[] = "Sisestage proovi tähis";
 			
-			if (!empty($_POST['Proovi materjal'])) {
+			if (!empty($_POST['materjal'])) {
 			} else $errors[] = "Sisestage proovi materjal";
 			
-			if (!empty($_POST['Proovivõtu koht'])) {
+			if (!empty($_POST['koht'])) {
 			} else $errors[] = "Sisestage proovivõtu koht";
 			
-			if (!empty($_POST['Proovivõtu aeg'])) {
+			if (!empty($_POST['aeg'])) {
 			} else $errors[] = "Sisestage proovivõtu aeg";
 			
 			if (empty($errors)) {
-				$t2his = mysqli_real_escape_string($connection, $_POST["Proovi tähis"]);
-				$materjal = mysqli_real_escape_string($connection, $_POST["Proovi materjal"]);
-				$koht = mysqli_real_escape_string($connection, $_POST["Proovivõtu koht"]);
-				$aeg = mysqli_real_escape_string($connection, $_POST["Proovivõtu aeg"]);
-				$sql = "INSERT INTO klasberg_labor (Proovi tähis, Proovi materjal, Proovivõtu koht, Proovivõtu aeg) VALUES ('{$t2his}','{$materjal}', '{$koht}', '{$aeg}'";
+				$tähis = mysqli_real_escape_string($connection, $_POST["tähis"]);
+				$materjal = mysqli_real_escape_string($connection, $_POST["materjal"]);
+				$koht = mysqli_real_escape_string($connection, $_POST["koht"]);
+				$aeg = mysqli_real_escape_string($connection, $_POST["aeg"]);
+				$sql = "INSERT INTO klasberg_labor (tähis, materjal, koht, aeg) VALUES ('{$tähis}', '{$materjal}', '{$koht}', '{$aeg}')";
 				$result = mysqli_query($connection, $sql) or die ("ei saa proovi lisatud".mysqli_error($connection));
 				$id = mysqli_insert_id($result);
 				if ($id) {
