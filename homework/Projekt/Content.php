@@ -89,7 +89,6 @@ function lisa(){
 				$materjal = mysqli_real_escape_string($connection, $_POST["Proovi materjal"]);
 				$koht = mysqli_real_escape_string($connection, $_POST["Proovivõtu koht"]);
 				$aeg = mysqli_real_escape_string($connection, $_POST["Proovivõtu aeg"]);
-								
 				$sql = "INSERT INTO klasberg_labor (Proovi tähis, Proovi materjal, Proovivõtu koht, Proovivõtu aeg) VALUES ('{$t2his}','{$materjal}', '{$koht}', '{$aeg}'";
 				$result = mysqli_query($connection, $sql) or die ("ei saa proovi lisatud".mysqli_error($connection));
 				$id = mysqli_insert_id($result);
@@ -97,16 +96,15 @@ function lisa(){
 					$_SESSION['user'] = $_POST['user'];
 					header("Location: ?page=teenused");
 				} else {
-					header("Location: ?page=lisa");
+					header("Location: ?page=lisaproov");
 				}	
 			}
 			
 		}
-	}	
-		include_once('views/lisaproov.html');
 	
-}	
-
+	}	
+	include_once('views/lisaproov.html');
+	}
 	
 	
 function upload($name){
