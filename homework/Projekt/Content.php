@@ -57,8 +57,31 @@ function kuva_teenused(){
 	include_once('views/teenused.html');
 }
 
-function otsi(){
-}	
+function proovid(){
+	global $connection;
+	global $errors;
+	//suunab sisselogimisele
+	if (empty($_SESSION['user'])){
+		header("Location: ?page=login");
+	
+	$sql="SELECT * FROM klasberg_labor";
+	$result=mysqli_query($connection, $sql) or die("Ei saa proovide andmeid kätte".mysqli_error($connection));
+	print_r($result);
+	header("Location: ?page=proovid");
+	}	
+}
+	
+	//if ($result->num_rows > 0) {
+		// output data of each row
+		//while($row = $result->fetch_assoc()) {
+		//	echo "<br> id: " . $row["id"]. " - Proovi tähis:".$row["t2his"]." ".$row["materjal"]." ".$row["koht"]." ".$row["aeg"]."<br>;
+		//}else {
+		//echo "0 results";
+	//include_once('views/proovid.html');
+	
+
+
+
 
 function lisa(){
 	global $connection;

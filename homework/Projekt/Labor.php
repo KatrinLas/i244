@@ -23,8 +23,8 @@ switch($page){
 	case "lisa":
 		lisa();
 	break;
-	case "otsi":
-		otsi();
+	case "proovid":
+		proovid();
 	break;
 	default:
 		include_once('views/avaleht.html');
