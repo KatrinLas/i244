@@ -57,19 +57,19 @@ function kuva_teenused(){
 	include_once('views/teenused.html');
 }
 
-function proovid(){
-	global $connection;
-	global $errors;
+//function proovid(){
+//	global $connection;
+//	global $errors;
 	//suunab sisselogimisele
-	if (empty($_SESSION['user'])){
-		header("Location: ?page=login");
+//	if (empty($_SESSION['user'])){
+//		header("Location: ?page=login");
 	
-	$sql="SELECT * FROM klasberg_labor";
-	$result=mysqli_query($connection, $sql) or die("Ei saa proovide andmeid kätte".mysqli_error($connection));
-	print_r($result);
-	header("Location: ?page=proovid");
-	}	
-}
+//	$sql="SELECT * FROM klasberg_labor";
+//	$result=mysqli_query($connection, $sql) or die("Ei saa proovide andmeid kätte".mysqli_error($connection));
+//	print_r($result);
+//	header("Location: ?page=proovid");
+//	}	
+//}
 	
 	//if ($result->num_rows > 0) {
 		// output data of each row
@@ -131,48 +131,5 @@ function lisa(){
 	}	
 	include_once('views/lisaproov.html');
 	}
-	
-	
-function upload($name){
-	$allowedExts = array("jpg", "jpeg", "gif", "png");
-	$allowedTypes = array("image/gif", "image/jpeg", "image/png","image/pjpeg");
-	$extension = end(explode(".", $_FILES[$name]["name"]));
- 	if ( in_array($_FILES[$name]["type"], $allowedTypes)
- 		&& ($_FILES[$name]["size"] < 100000)
- 		&& in_array($extension, $allowedExts)) {
-   
-	// fail õiget tüüpi ja suurusega
- 		if ($_FILES[$name]["error"] > 0) {
-			$_SESSION['notices'][]= "Return Code: " . $_FILES[$name]["error"];
-			return "";
-				$_SESSION['notices'][]= "Return Code: " . $_FILES[$name]["error"];
-				return "";
- 		} else {
-      // vigu ei ole
-			if (file_exists("pildid/" . $_FILES[$name]["name"])) {
-        // fail olemas ära uuesti lae, tagasta failinimi
-				$_SESSION['notices'][]= $_FILES[$name]["name"] . " juba eksisteerib. ";
-				return "pildid/" .$_FILES[$name]["name"];
-			} else {
-        // kõik ok, aseta pilt
-				move_uploaded_file($_FILES[$name]["tmp_name"], "pildid/" . $_FILES[$name]["name"]);
-				return "pildid/" .$_FILES[$name]["name"];
-			}
-	// vigu ei ole
-				if (file_exists("pildid/" . $_FILES[$name]["name"])) {
-		// fail olemas ära uuesti lae, tagasta failinimi
-					$_SESSION['notices'][]= $_FILES[$name]["name"] . " juba eksisteerib. ";
-					return "pildid/" .$_FILES[$name]["name"];
-				} else {
-		// kui kõik ok, aseta pilt 6igesse kausta
-					move_uploaded_file($_FILES[$name]["tmp_name"], "pildid/" . $_FILES[$name]["name"]);
-					return "pildid/" .$_FILES[$name]["name"];
-			}	
- 		}
-	
- 	} else {
- 		return "";
- 	}
-}	
 
 ?>

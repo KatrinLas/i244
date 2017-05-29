@@ -8,10 +8,10 @@
 <body>
 <div id="wrap">
 	<ul id="menu">
+		<meta charset="utf-8"/>
 		<li><a href="?">Avaleht</a></li>
 		<li><a href="?page=teenused">Teenused</a></li>
 		<?php if(isset($_SESSION['user'])): ?>
-			<li><a href="?page=proovid">Proovid</a></li>
 			<?php if($_SESSION['roll'] == "admin"): ?>
 			<li><a href="?page=lisa">Lisa proove</a></li>
 			<?php endif; ?>
@@ -22,4 +22,5 @@
 	</ul>
 	<div id="content">
 	
+
 
