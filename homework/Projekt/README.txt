@@ -8,3 +8,6 @@ parool:password
 Tavakasutaja-
 kasutajanimi:kasutaja
 parool:parool
+
+Kasutatud materjal:
+It kolledži i244 õppeaine materjalid (õppejõu Tiia Tänava materjalid ja koodid)
