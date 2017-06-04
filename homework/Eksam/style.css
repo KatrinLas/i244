@@ -1,0 +1,9 @@
+body {
+	background: green;
+	text-align: center;
+	padding-top: 200px;
+}
+
+#notes {
+	rows=5; cols=40;
+}
