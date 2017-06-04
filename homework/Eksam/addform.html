@@ -1,6 +1,6 @@
 <form action="?page=add" method="POST" enctype="multipart/form-data">
-	<input type="text" name="username" placeholder="kasutajanimi" value="<?php if (isset($user['username'])) echo htmlspecialchars($user['username']); ?>"/><br/>
-	<input type="textarea" name="notes" placeholder="Kirjuta siia oma märkmed" value="<?php if (isset($user['notes'])) echo htmlspecialchars($user['notes']); ?>"/><br/>
+	<input type="text" name="username" placeholder="kasutajanimi" value="<?php if (isset($user['username'])) echo htmlspecialchars($user['username']); ?>"/><br/><br/>
+	<input type="text" id="kast" name="notes" placeholder="Kirjuta siia oma märkmed" value="<?php if (isset($user['notes'])) echo htmlspecialchars($user['notes']); ?>"/><br/>
 	<input type="submit" value="Lisa"/> 
 </form>
 <?php if (isset($errors)):?>

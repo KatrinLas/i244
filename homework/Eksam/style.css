@@ -4,6 +4,10 @@ body {
 	padding-top: 200px;
 }
 
-#notes {
-	rows=5; cols=40;
+input[type=text]{
+	height: 150px;
+	rows="20"; 
+	cols="40";
+	display: inline-block;
+	border-radius: 4px;
 }
