@@ -32,6 +32,7 @@ function add (){
 				$notes = mysqli_real_escape_string($connection, $_POST["notes"]);
 				//lisatud andmed lähevad nüüd tabelisse klasberg_eksam
 				$sql = "INSERT INTO klasberg_eksam (username, notes) VALUES ('{$user}','{$notes}')";
+				echo ("Andmed lisatud");
 				//toimub kas andmete lisamine või ei saa andmeid lisada
 								
 				$result = mysqli_query($connection, $sql) or die ("ei saa märkmeid lisatud".mysqli_error($connection));		
