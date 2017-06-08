@@ -136,11 +136,15 @@ function lisa(){
 
 function kuva (){
 	global $connection;
-	$kuva="SELECT * FROM klasberg_proovid";
+	$read=array();
+	$kuva='SELECT * FROM klasberg_labor';
 	$kuvaquery=mysqli_query($connection,$kuva);
-		while($rida=mysqli_fetch_assoc($kuvaquery)){
-			echo "{$rida['materjal']}<br/>";
+	while($rida=mysqli_fetch_assoc($kuvaquery)){
+		$read[]=$rida;
+	
 	}
-}	
+	include_once('views/proovid.html');
+}
+
 
 ?>

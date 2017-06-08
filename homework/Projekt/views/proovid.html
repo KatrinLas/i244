@@ -1,0 +1,20 @@
+<meta charset="utf-8"/>
+<table border="1">
+<tr>
+	<th>id</th>
+	<th>materjal</th>
+	<th>koht</th>
+	<th>aeg</th>
+<tr>
+<?php if (!empty($read)):
+	foreach($read as $id=>$rida):
+?>
+<tr>
+	<td><?php echo htmlspecialchars ($rida["id"]); ?></td>
+	<td><?php echo htmlspecialchars ($rida["materjal"]); ?></td>
+	<td><?php echo htmlspecialchars ($rida["koht"]); ?></td>
+	<td><?php echo htmlspecialchars ($rida["aeg"]); ?></td>
+<tr>
+<?php endforeach;
+endif;
+?>

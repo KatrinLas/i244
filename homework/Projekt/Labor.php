@@ -25,6 +25,7 @@ switch($page){
 	break;
 	case "proovid":
 		kuva();
+		include_once('views/proovid.html');
 	break;
 	default:
 		include_once('views/avaleht.html');
