@@ -24,7 +24,7 @@ switch($page){
 		lisa();
 	break;
 	case "proovid":
-		proovid();
+		kuva();
 	break;
 	default:
 		include_once('views/avaleht.html');

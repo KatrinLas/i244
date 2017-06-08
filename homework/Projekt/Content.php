@@ -57,6 +57,7 @@ function kuva_teenused(){
 	include_once('views/teenused.html');
 }
 
+
 //function proovid(){
 //	global $connection;
 //	global $errors;
@@ -116,14 +117,15 @@ function lisa(){
 				$koht = mysqli_real_escape_string($connection, $_POST["koht"]);
 				$aeg = mysqli_real_escape_string($connection, $_POST["aeg"]);
 				$sql = "INSERT INTO klasberg_labor (tähis, materjal, koht, aeg) VALUES ('{$tähis}', '{$materjal}', '{$koht}', '{$aeg}')";
+				echo "proovid lisatud";
 				$result = mysqli_query($connection, $sql) or die ("ei saa proovi lisatud".mysqli_error($connection));
 				$id = mysqli_insert_id($result);
-				if ($id) {
+				/* if ($id) {
 					$_SESSION['user'] = $_POST['user'];
 					header("Location: ?page=teenused");
 				} else {
 					header("Location: ?page=lisaproov");
-				}	
+				}	 */
 			}
 			
 		}
@@ -131,5 +133,14 @@ function lisa(){
 	}	
 	include_once('views/lisaproov.html');
 	}
+
+function kuva (){
+	global $connection;
+	$kuva="SELECT * FROM klasberg_proovid";
+	$kuvaquery=mysqli_query($connection,$kuva);
+		while($rida=mysqli_fetch_assoc($kuvaquery)){
+			echo "{$rida['materjal']}<br/>";
+	}
+}	
 
 ?>
