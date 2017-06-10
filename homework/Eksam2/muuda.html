@@ -1,0 +1,12 @@
+<form action="?page=Muuda" method="POST" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="<?php if (isset($_GET['id'])) echo htmlspecialchars($_GET['id']); ?>"/><br>
+	<input type="textarea" name="notes" placeholder="Kirjuta siia oma märkmed" value="<?php if (isset($user['notes'])) echo htmlspecialchars($user['notes']); ?>"/><br/>
+	<input type="submit" value="Muuda"/> <input type="submit" value="Muuda"/>
+</form>
+
+<?php if (isset($errors)):?>
+		<?php foreach($errors as $error):?>
+			<div style="color:red;"><?php echo htmlspecialchars($error); ?></div>
+		<?php endforeach;?>
+	<?php endif;?>
+	
