@@ -11,6 +11,7 @@ include_once('head.html');
 add();
 kuva();
 
+include_once('muuda.html');
 
 include_once('foot.html');
 

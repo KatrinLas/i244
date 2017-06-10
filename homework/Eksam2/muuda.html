@@ -1,7 +1,8 @@
+<br>
 <form action="?page=Muuda" method="POST" enctype="multipart/form-data">
-	<input type="hidden" name="id" value="<?php if (isset($_GET['id'])) echo htmlspecialchars($_GET['id']); ?>"/><br>
-	<input type="textarea" name="notes" placeholder="Kirjuta siia oma märkmed" value="<?php if (isset($user['notes'])) echo htmlspecialchars($user['notes']); ?>"/><br/>
-	<input type="submit" value="Muuda"/> <input type="submit" value="Muuda"/>
+	<input type="text" name="id" placeholder="Kirjuta siia märkmete ID" value="<?php if (isset($user['id'])) echo htmlspecialchars($user['id']); ?>"/><br>
+	<input type="textarea" name="notes" placeholder="Kirjuta siia uued märkmed" value="<?php if (isset($uusnotes)) echo htmlspecialchars($uusnotes); ?>"/><br/>
+	<input type="submit" value="Muuda"/> 
 </form>
 
 <?php if (isset($errors)):?>

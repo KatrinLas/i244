@@ -54,7 +54,27 @@ function kuva (){
 function muuda (){
 	global $connection;
 	global $errors;
-	$muuda="UPDATE* FROM klasberg
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$errors = array();
+			if (!empty($_POST['id'])) {
+			} else $errors[] = "Sisestage märkmete ID number";
+			
+			if (!empty($_POST['notes'])) {
+			} else $errors[] = "Sisestage uued märkmed";
+			
+			if (empty($errors)) {
+				$id = mysqli_real_escape_string($connection, $_POST["id"]);	
+				$uusnotes = mysqli_real_escape_string($connection, $_POST["notes"]);		
+				$muuda="UPDATE klasberg_eksam2 SET notes='$uusnotes' WHERE id='$id'";
+				if (mysql_query($connection, $muuda)){
+				echo "Andmed muudetud";
+				} else {
+				echo "Ei saanud andmeid muudetud".mysqli_error($connection);
+				
+				}
+			}
+		include_once('muuda.html');	
+	}		
 }
 	
 ?>
